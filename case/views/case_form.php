@@ -1,6 +1,3 @@
-<!-- report is actionable -->
- 
-<!-- / report is actionable -->
 
 <!-- report is acted on -->
 <br />

@@ -1,11 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 /**
- * simplegroups helper class.
+ * case helper class.
  */
 
-/*
- * Class That help other by call their methods
- */
 class caseh_Core {
 
 

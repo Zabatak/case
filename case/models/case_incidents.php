@@ -4,7 +4,7 @@
 * Model for users in a group
  *
  * 
- * @author     John Etherton <john.etherton@gmail.com>
+ * @author     John Etherton <ahmed.elsayed.salem@gmail.com>
  */
 
 class Case_incidents_Model extends ORM
