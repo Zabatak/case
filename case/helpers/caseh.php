@@ -3,7 +3,9 @@
  * simplegroups helper class.
  */
 
-
+/*
+ * Class That help other by call their methods
+ */
 class caseh_Core {
 
 
