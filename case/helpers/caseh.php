@@ -34,6 +34,27 @@ class caseh_Core {
 		
 		return $cases;
 	}//end function
+        
+        /**************************************************************************************************************
+	*Get All cases as array
+	**************************************************************************************************************/
+	public function get_cases(){
+            
+            $case_array = array();
+            foreach (ORM::factory('case')->orderby('id')->find_all() as $case)
+                            {
+                                    // Create a list of all cases
+                                    $this_case = $case->title;
+
+                                    if (strlen($this_case) > 35)
+                                    {
+                                            $this_case = substr($this_case, 0, 35) . "...";
+                                    }
+                                    $case_array[$case->id] = $this_case;
+
+                            }
+            return $case_array;                
+        }              
 }//end class
 
 

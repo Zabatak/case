@@ -21,7 +21,7 @@ class caseHook {
 	{
 		 
 		$this->case_array = array();
-		$this->case_id = "";
+		$this->case_id = '';
 		
 		 
 		
@@ -48,7 +48,11 @@ class caseHook {
 					// Hook into the report_edit (post_SAVE) event
 					Event::add('ushahidi_action.report_edit', array($this, '_report_form_submit'));
 					break;
-				
+				// Hook into the Report view (front end)
+				case 'view':
+					plugin::add_stylesheet('case/views/css/actionable');
+					Event::add('ushahidi_action.report_meta', array($this, '_report_view'));
+					break;
 				
 			}
 		}
@@ -75,24 +79,13 @@ class caseHook {
 			 
 			
 			// Get cases
-			$this->case_array = array();
-			foreach (ORM::factory('case')->orderby('id')->find_all() as $case)
-			{
-				// Create a list of all cases
-				$this_case = $case->title;
-				
-				if (strlen($this_case) > 35)
-				{
-					$this_case = substr($this_case, 0, 35) . "...";
-				}
-				$this->case_array[$case->id] = $this_case;
-			 
-			}
+			$this->case_array = caseh::get_cases();
+			
 			 	
 		}
 		
 		//send case_id to form
-		$form->case_id = ' ';
+		$form->case_id = $this->case_id;
 		//send case array to form
 		$form->case_array = $this->case_array;
 		
@@ -119,6 +112,38 @@ class caseHook {
 			
 			$case_item->save();
 			
+		}
+	}//end of method
+        
+        /**
+	 * Render the Action Taken Information to the Report
+	 * on the front end
+	 */
+	public function _report_view()
+	{
+		$incident_id = Event::$data;
+		if ($incident_id)
+		{
+			$caseview = ORM::factory('case_incidents')
+				->where('incident_id', $incident_id)
+				->find();
+			
+			if ($caseview->loaded)
+			{	
+					//get case id
+					$case_id = $caseview->cases_case_id;
+					
+					$case = ORM::factory('case')
+								->where('id',$case_id)
+								->find();
+					 
+					$report = View::factory('case_report');
+					
+					$report->case_name= $case;
+					
+					$report->render(TRUE);
+				
+			}
 		}
 	}
 	
