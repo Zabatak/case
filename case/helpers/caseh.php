@@ -34,6 +34,26 @@ class caseh_Core {
 		return $cases;
 	}//end function
         
+        
+        /**************************************************************************************************************
+	* Given all the parameters returns a list of incidents that meet the search criteria
+	**************************************************************************************************************/
+	/*function to get the comments that are already signed up for a group*/
+	public function get_comments_for_case( $id )
+	{
+		 
+		$where_text = "comment.id = $id";
+		//get all the comments for that case
+		$comments = ORM::factory('case_comments')
+			->select("case_comments.*")
+			->where($where_text)
+			->find();
+
+		
+		return $comments;
+	}//end function
+        
+        
         /**************************************************************************************************************
 	*Get All cases as array
 	**************************************************************************************************************/

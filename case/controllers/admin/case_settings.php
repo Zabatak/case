@@ -53,7 +53,7 @@ function __construct()
 	
 	}
 	 /***********************************************************************************
-    * Edit a group
+    * Edit a case
     * @param bool|int $id The id no. of the group
     * @param bool|string $saved
     */
@@ -74,8 +74,8 @@ function __construct()
             'title'      => '',
             'description'      => '',
             'logo'           => '',
-			'contact_person' =>'',
-			'contact_person_phone' =>'',
+            'contact_person' =>'',
+            'contact_person_phone' =>'',
 			
 	    	
         );

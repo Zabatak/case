@@ -47,7 +47,19 @@ class Case_Install {
 				  PRIMARY KEY (`id`)
 				) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1');
 				
-		//Create defualt entry in case table
+		
+
+                // ****************************************
+		//create the table that tracks the incideints associated with a case
+		$this->db->query('CREATE TABLE IF NOT EXISTS `'.Kohana::config('database.default.table_prefix').'cases_comments` (
+				  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+				  `cases_case_id` int(10) unsigned NOT NULL,
+                                  `comment_ip` varchar(100) DEFAULT NULL,
+                                  `comment_email` varchar(120) DEFAULT NULL,                               
+				  `comment_id` int(10) unsigned NOT NULL,
+				  PRIMARY KEY (`id`)
+				) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1');
+                //Create defualt entry in case table
 		//insert into cases (`id`,`title`,`contact_person`,`contact_person_phone`,`description`)values(0,"","","","")
 		$this->db->query("INSERT INTO `".Kohana::config('database.default.table_prefix')."cases` (`id` ,`title` ,`contact_person` ,`contact_person_phone` ,
 				`description` ,`logo`)

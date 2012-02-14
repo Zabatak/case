@@ -9,16 +9,19 @@
 
 </div>
    
-
-			<div class="table-holder">
-	<table  class="table"
+ 
+<div class="table-holder">
+	<table class="table" style="align-left:10px">
 	
 		<thead>
 			<tr>
 			
-				<th># id</th>				
-				<th># Title</th>
-				<th># Description</th>
+		 <th><h5 style="color: #009200;">Case Title</h4></th>
+	
+		<th></th>
+		
+		 <th><h5 style="color: #009200;"> Description</h5></th>
+			
 			</tr>
 		</thead>
 		<tfoot>		
@@ -34,9 +37,10 @@
 						
 						
 						echo "<tr>";
-						echo "<td>".$case_id."</td>";
-						echo "<td>".$case_title."</td>";
-						echo "<td>".$case_desc."</td>";
+						echo "<td><h5 style='color: #009900';><a href=\"".url::site()."case_view/openCase/".$case_id."\">".$case_title."</h5></td>";
+						
+						echo "<td class='col'></td>";
+						echo "<td class='col'><h5 style='color: #0099DD';>".$case_desc."</h5></td>";
 						 
 						echo "</tr>";
 					}
@@ -49,6 +53,3 @@
 	 
 <br />
  
-		
- <div style="clear:both;"></div>
-

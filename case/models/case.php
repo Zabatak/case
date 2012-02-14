@@ -20,7 +20,8 @@ class Case_Model extends ORM
 	// Database table name
 	protected $table_name = 'cases';
 	// Define Case relations
-	protected $has_many = array(
-				"incident"=>"cases_incidents"
-							);
+        protected $has_many = array(
+                                "incident"=>"cases_incidents",
+                                "comment"=>"cases_comments"
+                                );
 }
