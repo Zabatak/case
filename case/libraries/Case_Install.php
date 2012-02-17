@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Performs install/uninstall methods for the FrontlineSMS Plugin
+ * Performs install/uninstall methods for the Case Plugin
  *
  * @package    Ushahidi
  * @author     Ushahidi Team

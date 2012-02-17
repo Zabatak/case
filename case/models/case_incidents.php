@@ -1,10 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
-* Model for users in a group
+* Model for incidents in a case
  *
  * 
- * @author     John Etherton <ahmed.elsayed.salem@gmail.com>
+ * @author     Ahmed Salem <ahmed.elsayed.salem@gmail.com>
  */
 
 class Case_incidents_Model extends ORM
