@@ -1,4 +1,4 @@
-========= About ==============
+=========[ About ]==============
 Welcome to Usahidi Case Plugin
 name: Case
 website: http://www.ushahidi.com
