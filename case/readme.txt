@@ -1,4 +1,5 @@
-=== About ===
+========= About ==============
+Welcome to Usahidi Case Plugin
 name: Case
 website: http://www.ushahidi.com
 description:  Open case from some incidents ,Case have contact person, comments and best solution to solve it. 
