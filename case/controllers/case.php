@@ -1,5 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
+ * 
  * Viddler Controller
  *
  * PHP version 5

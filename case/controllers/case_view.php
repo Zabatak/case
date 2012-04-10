@@ -1,4 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
+
+
+
 /**
  * Viddler Controller
  *
@@ -105,19 +108,21 @@ public function __construct()
 				
 				
 				// Save the Case
-				$case_comment = new Case_comments_Model($id);
+				$case_comment = new Case_comments_Model();
 				$case_comment->comment = $post->comment;
-				$case_comment->comment_ip = $post->comment->ip_address();
+				$case_comment->comment_ip = $_SERVER['REMOTE_ADDR'];
 				$case_comment->comment_email = $post->email;
 				$case_comment->cases_case_id = $id;
-				$case->save();
+                                $case_comment->comment_date = date("Y-m-d H:i:s",time());
+                                
+				$case_comment->save();
 				
-								
-				 
-				$id = $case_comment->id;
-		
-	
+                                url::redirect('case_view/openCase/'.$id);
+                                
+				$_id = $case_comment->id;
+                               
 			}
+                       
 			// No! We have validation errors, we need to show the form again, with the errors
 			else
 			{
@@ -127,6 +132,9 @@ public function __construct()
 				$errors = arr::overwrite($errors, $post->errors('case'));
 				$form_error = TRUE;
 			}
+                        
+                          // Redirect
+			//url::redirect('case_view/openCase/'.$id);
         } //end if($_POST)
         else
         {
@@ -141,18 +149,9 @@ public function __construct()
 							->where(array('cases_case_id' => $id))
 							->find_all();
 			
-			
-			$comments_array = array();
-			 
-			//After getting Ids get incident data		
-			foreach($comments_array as $comment_id){
-			
-				$comment = caseh::get_comments_for_case($comment_id->id);
-				//Add incident object to array
-				array_push($comments_array,$comment);
-				
-			}
-			
+//			echo "->>>>>>>>>".count($comment_id_array);
+
+                        
 			//load form fields
 			if ($case->loaded == true)
 			{
@@ -186,7 +185,7 @@ public function __construct()
 
         $this->template->content->id = $id;
         $this->template->content->form = $form;
-	$this->template->content->comments = $comments_array;
+	$this->template->content->comments = $comment_id_array;
         $this->template->content->errors = $errors;
         $this->template->content->form_error = $form_error;
         $this->template->content->form_saved = $form_saved;

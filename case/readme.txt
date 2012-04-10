@@ -1,5 +1,4 @@
-=========[ About ]==============
-Welcome to Usahidi Case Plugin
+=== About ===
 name: Case
 website: http://www.ushahidi.com
 description:  Open case from some incidents ,Case have contact person, comments and best solution to solve it. 
@@ -19,5 +18,3 @@ Case have comments and best solution to solve it.
 3. Click on the [settings] link to get your Case URL
 
 == Changelog ==
-
-Test From Tanahy

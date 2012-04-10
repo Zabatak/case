@@ -33,7 +33,7 @@
 					{
 						$case_id = $case->id;
 						$case_title = $case->title;
-						$case_desc	= $case->description;
+						$case_desc= $case->description;
 						
 						
 						echo "<tr>";

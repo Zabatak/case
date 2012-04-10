@@ -15,6 +15,7 @@ class Case_Install {
 	public function __construct()
 	{
 		$this->db =  new Database();
+                $this->uninstall();
 	}
 
 	/**
@@ -44,8 +45,10 @@ class Case_Install {
 				  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 				  `cases_case_id` int(10) unsigned NOT NULL,
 				  `incident_id` int(10) unsigned NOT NULL,
-				  PRIMARY KEY (`id`)
-				) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1');
+                                  PRIMARY KEY (`id`),
+                                  KEY `cases_incidents_case_FK` (`cases_case_id`),
+                                  CONSTRAINT `cases_incidents_case_FK` FOREIGN KEY (`cases_case_id`) REFERENCES `'.Kohana::config('database.default.table_prefix').'cases` (`id`)
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1');
 				
 		
 
@@ -56,9 +59,12 @@ class Case_Install {
 				  `cases_case_id` int(10) unsigned NOT NULL,
                                   `comment_ip` varchar(100) DEFAULT NULL,
                                   `comment_email` varchar(120) DEFAULT NULL,                               
-				  `comment_id` int(10) unsigned NOT NULL,
-				  PRIMARY KEY (`id`)
-				) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1');
+				  `comment` varchar(120) NOT NULL,
+                                  `comment_date` DATE NOT NULL,
+				  PRIMARY KEY (`id`),
+                                  KEY `case_comments_fk` (`cases_case_id`),
+                                  CONSTRAINT `case_comments_fk` FOREIGN KEY (`cases_case_id`) REFERENCES `'.Kohana::config('database.default.table_prefix').'cases` (`id`)
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1');
                 //Create defualt entry in case table
 		//insert into cases (`id`,`title`,`contact_person`,`contact_person_phone`,`description`)values(0,"","","","")
 		$this->db->query("INSERT INTO `".Kohana::config('database.default.table_prefix')."cases` (`id` ,`title` ,`contact_person` ,`contact_person_phone` ,
@@ -73,8 +79,19 @@ class Case_Install {
 	 */
 	public function uninstall()
 	{
-		$this->db->query("
-			DROP TABLE ".Kohana::config('database.default.table_prefix')."cases;
+            
+                $this->db->query("
+			DROP TABLE IF EXISTS ".Kohana::config('database.default.table_prefix')."cases_comments;
 			");
+                
+                $this->db->query("
+			DROP TABLE IF EXISTS ".Kohana::config('database.default.table_prefix')."cases_incidents;
+			");
+                
+		$this->db->query("
+			DROP TABLE IF EXISTS ".Kohana::config('database.default.table_prefix')."cases;
+			");
+                
+                
 	}
 }

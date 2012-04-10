@@ -12,7 +12,7 @@
 
 <input type="hidden" name="save" id="save" value="">
 <!-- report-form -->
-<div class="report-form">
+<div class="report_row">
     <?php
     if ($form_error) {
         ?>
@@ -39,41 +39,35 @@
         <?php
     }
     ?>
-    <table>
-        <tr>
-            <td>
+       <div class="report_row">
 
                 <h4>Case Title :<span></span></h4>
 
-
-            </td>
-            <td>
+       </div>
+        
+        <div class="report_row">
+          
                 <?php print form::label('title', $form['title'], ' class="text title"'); ?>
-            </td>
-        </tr>
+        </div>
 
 
-        <tr>
-            <td>
-
+       <div class="report_row">
                 <h4>Case Description :<span></span></h4>
 
-            </td>
-            <td>
+        </div>
+        <div class="report_row">
                 <?php print form::label('Description', $form['description'], ' class="text title"'); ?>
 
-            </td>
-        </tr>
-        <tr>
-            <td><h5>Comments linked to that case = <?php print count($comments); ?></h5> </td>
-
-        </tr>
-        <tr>
-            <td>
-                <table class="table" style="width:80%">
+         </div>
+        <div class="report_row">
+            <h5>Comments linked to that case = <?php print count($comments); ?></h5> </td>
+         </div>
+        <div class="report_row">
+           
+                <table class="table" style="width:80px; height: 50px">
                     <thead>
                         <tr>
-                            
+
                             <th>Email</th>
                             <th>Date </th>
                         </tr>
@@ -87,18 +81,27 @@
 
                         $role_style = "style=\"background:#eee; color:#888;\"";
                         echo "<tr>";
-                        echo "<td><span style=\"font-size:15;align:center\">";
-                        echo"" . $comment->id;
+                        echo "<td align=left>";
+                        echo"Date :" . $comment->comment_date;
                         echo "&nbsp;&nbsp;&nbsp;";
+                        echo "</td>";
                         echo "<td>";
-                        echo"" . $comment->comment;
+                        echo" Email" . $comment->comment_email;
                         echo "&nbsp;&nbsp;&nbsp;";
                         echo "</td>";
                         echo "</tr>";
 
                         echo "<tr>";
-                        echo "<td><span style=\"font-size:15;align:center\">";
-                        echo"" . $comment->email;
+                        echo "<td colspan=2 align=center>";
+                        echo "" . $comment->comment;
+                        echo "&nbsp;&nbsp;&nbsp;";
+
+                        echo "</td>";
+                        echo "</tr>";
+                        
+                        echo "<tr>";
+                        echo "<td align=right>";
+                        echo "" . "Rating";
                         echo "&nbsp;&nbsp;&nbsp;";
 
                         echo "</td>";
@@ -106,9 +109,7 @@
                     }
                     ?>
                 </table>
-            </td>
-        </tr>
-    </table>
+        </div>
 
 
     <br/>
@@ -117,25 +118,25 @@
 <hr/>
 <div class="row">
     <h6>comment</h6>
-<?php print form::input('comment', $form['comment'], ' class="text title"'); ?>
+    <?php print form::input('comment', $form['comment'], ' class="text title"'); ?>
 </div>
 
-<div class="btns">
-    <ul>
-        <li><a href="#" class="btn_save"><?php echo strtoupper("submit"); ?></a></li>
+<div class="row">
+    <h6>Author Mail</h6>
+    <?php print form::input('email', $form['email'], ' class="text title"'); ?>
+</div>
 
-        <li><a href="<?php echo url::site() . 'admin/case_settings/'; ?>" class="btns_red">
-           </a></li>
-    </ul>
-</div>	
+<div class="report_row">
+    <input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" /> 
+</div>
+
 <?php print form::close(); ?>                 
 <?php
-		if($id)
-		{
-			// Hidden Form to Perform the Delete function
-			print form::open(url::site().'admin/case_settings', array('id' => 'reportMain', 'name' => 'reportMain'));
-			$array=array('action'=>'d','group_id[]'=>$id);
-			print form::hidden($array);
-			print form::close();
-		}
-	?>
+if ($id) {
+    // Hidden Form to Perform the Delete function
+    print form::open(url::site() . 'admin/case_settings', array('id' => 'reportMain', 'name' => 'reportMain'));
+    $array = array('action' => 'd', 'group_id[]' => $id);
+    print form::hidden($array);
+    print form::close();
+}
+?>
