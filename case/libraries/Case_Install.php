@@ -35,6 +35,7 @@ class Case_Install {
 				contact_person_phone varchar(50) DEFAULT NULL,
 				description longtext,
 				logo varchar(200) default NULL,
+                                entry_date DATE NOT NULL,
 				PRIMARY KEY (`id`)
 			);
 		");
