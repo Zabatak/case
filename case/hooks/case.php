@@ -69,7 +69,7 @@ class caseHook {
 	public function _report_form()
 	{
 		// Load the View
-		$form = View::factory('case_form');
+		$form = View::factory('case_hook');
 		// Get the ID of the Incident (Report)
 		$id = Event::$data;
 		

@@ -75,10 +75,6 @@
                 </div>
                 <br>
             </div>
-
-
-
-            <!-- end additional fields -->
             <!-- credibility fields -->
             <div class="credibility">
                 <table class="rating-table" cellspacing="0" cellpadding="0" border="0">

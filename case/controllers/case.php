@@ -52,22 +52,22 @@ class Case_Controller extends Main_Controller {
     function openCase($id = false, $saved = false) {
 
 
-
-        $this->template->content = new View('open_case');
+        //Declare view for displaying case
+        $this->template->content = new View('case');
         $this->template->content->title = "Open Case";
-        $this->themes->js = new View('open_case_js');
+        $this->themes->js = new View('case_js');
 
 
-
+        //declare array for case commentts
         $this->template->content->comments = array();
         $this->template->content->comment = '';
-
 
 
         // setup and initialize form field names
         $comments_array = array();
         $comment_id_array = array();
 
+        //form fields , displayed in case page
         $form = array
             (
             'email' => '',
@@ -78,7 +78,6 @@ class Case_Controller extends Main_Controller {
             'contact_person' => '',
             'contact_person_phone' => '',
         );
-
 
 
         //  copy the form as errors, so the errors will be stored with keys corresponding to the form field names
@@ -99,7 +98,6 @@ class Case_Controller extends Main_Controller {
             $post->pre_filter('trim', TRUE);
 
             // Add some rules, the input field, followed by a list of checks, carried out in order
-            // $post->add_rules('locale','required','alpha_dash','length[5]');
             $post->add_rules('comment', 'required', 'length[1,100]');
             $post->add_rules('email', 'required');
 
@@ -117,7 +115,7 @@ class Case_Controller extends Main_Controller {
 
                 $case_comment->save();
 
-                url::redirect('case_view/openCase/' . $id);
+                url::redirect('case/openCase/' . $id);
 
                 $_id = $case_comment->id;
             }
@@ -145,7 +143,6 @@ class Case_Controller extends Main_Controller {
                         ->where(array('cases_case_id' => $id))
                         ->find_all();
 
-//			echo "->>>>>>>>>".count($comment_id_array);
                 //load form fields
                 if ($case->loaded == true) {
 
@@ -169,6 +166,7 @@ class Case_Controller extends Main_Controller {
             }
         }
 
+        //send variable to view
         $this->template->content->id = $id;
         $this->template->content->form = $form;
         $this->template->content->comments = $comment_id_array;
@@ -176,14 +174,10 @@ class Case_Controller extends Main_Controller {
         $this->template->content->form_error = $form_error;
         $this->template->content->form_saved = $form_saved;
         $this->template->content->case_id = $case->id;
-        $this->template->content->case = $case;
         // Incident rating
         $this->template->content->rating = $rating;
-
         $this->template->header->header_block = $this->themes->header_block();
     }
-
-//end method
 
     /**
      * Report Rating.
