@@ -212,7 +212,7 @@ function __construct()
 
 
         // Javascript Header
-		$this->template->editor_enabled = TRUE;
+        $this->template->editor_enabled = TRUE;
         $this->template->js = new View('case/case_editcase_js');
     }//end method
 	

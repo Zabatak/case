@@ -1,6 +1,5 @@
 <div class="action-taken clearingfix"  style="border-width: 2px; border-style: dashed; border-color: #ff9900; ">
-  
-	
+  	
 	<?php if ($case_name) { ?>
 		
 		<div id="action-taken-badge">

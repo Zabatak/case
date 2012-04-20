@@ -62,6 +62,7 @@ class Case_Install {
                                   `comment_email` varchar(120) DEFAULT NULL,                               
 				  `comment` varchar(120) NOT NULL,
                                   `comment_date` DATE NOT NULL,
+                                  `rating` int(10) UNSIGNED NOT NULL DEFAULT 0 ,
 				  PRIMARY KEY (`id`),
                                   KEY `case_comments_fk` (`cases_case_id`),
                                   CONSTRAINT `case_comments_fk` FOREIGN KEY (`cases_case_id`) REFERENCES `'.Kohana::config('database.default.table_prefix').'cases` (`id`)

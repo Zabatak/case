@@ -76,21 +76,25 @@
                 <br>
             </div>
 
-           
+
+
             <!-- end additional fields -->
+            <!-- credibility fields -->
             <div class="credibility">
                 <table class="rating-table" cellspacing="0" cellpadding="0" border="0">
-                    <tbody><tr>
-                            <td>المصداقية:</td>
-                            <td><a href="javascript:rating('2344','add','original','oloader_2344')"><img id="oup_2344" src="http://zabatak.com/media/img/up.png" alt="UP" title="UP" border="0"></a></td>
-                            <td><a href="javascript:rating('2344','subtract','original')"><img id="odown_2344" src="http://zabatak.com/media/img/down.png" alt="DOWN" title="DOWN" border="0"></a></td>
-                            <td><a href="" class="rating_value" id="orating_2344">0</a></td>
-                            <td><a href="" id="oloader_2344" class="rating_loading"></a></td>
-                        </tr>
-                    </tbody></table>
+                    <tr>
+                        <td><?php echo Kohana::lang('ui_main.credibility'); ?>:</td>
+                        <td><a href="javascript:rating('<?php echo $case_id; ?>','add','original','oloader_<?php echo $case_id; ?>')">
+                                <img id="oup_<?php echo $case_id; ?>" src="<?php echo url::file_loc('img'); ?>media/img/up.png" alt="UP" title="UP" border="0" /></a></td>
+                        <td><a href="javascript:rating('<?php echo $case_id; ?>','subtract','original')">
+                                <img id="odown_<?php echo $case_id; ?>" src="<?php echo url::file_loc('img'); ?>media/img/down.png" alt="DOWN" title="DOWN" border="0" /></a></td>
+                        <td><a href="" class="rating_value" id="orating_<?php echo $case_id; ?>"><?php echo $rating; ?></a></td>
+                        <td><a href="" id="oloader_<?php echo $case_id; ?>" class="rating_loading" ></a></td>
+                    </tr>
+                </table>
             </div>
 
-
+            <!-- end credibility fields -->
             <div class="content">
 
                 <table class="rating-table" cellspacing="0" cellpadding="0" border="1" style="width: 450px;
@@ -136,15 +140,7 @@
         </div>
 
         <?php print form::close(); ?>                 
-        <?php
-        if ($id) {
-            // Hidden Form to Perform the Delete function
-            print form::open(url::site() . 'admin/case_settings', array('id' => 'reportMain', 'name' => 'reportMain'));
-            $array = array('action' => 'd', 'group_id[]' => $id);
-            print form::hidden($array);
-            print form::close();
-        }
-        ?>
+
     </div>
 </div>
 

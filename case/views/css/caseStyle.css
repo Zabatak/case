@@ -1,0 +1,72 @@
+/* 
+    Document   : caseStyle
+    Created on : 17/04/2012, 11:17:57 م
+    Author     : Ahmed Salem
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body{
+
+    direction: rtl;
+}
+
+h1, h2, h3, h4, h5, h6, .title, label, input.submit, .fonty li a, #mainmenu a, fancy {
+    font-family: GESSTwoMedium;
+    font-weight: normal !important;
+}
+h5 {
+    font-size: 150%;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+div.cases{
+    width: 650px;
+    margin: 0 auto;
+    height: 400px;
+    border: 2px solid #ccc;
+    -moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+    padding: 20px;
+}
+div.cases h5{
+    width: 200px;
+    margin-left: -20px;
+    margin-bottom: 2px;
+    padding:10px; border:7px solid #fff; background:#1A5333;
+    -webkit-box-shadow: -2px 2px 0 rgba(0,0,0,0.1);
+    box-shadow: -2px 2px 0 rgba(0,0,0,0.1);
+}
+
+div.row_case{
+    position: relative;
+    border: 1px solid #C0C2B8;
+    overflow: auto;
+    margin-bottom: 10px;
+    padding: 0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-left: 6px solid #368C00;
+}
+div.row_details{
+
+    float: right;
+    width: auto;
+    margin: 3px 0;
+}
+
+div.row_details p{
+
+    display: inline;
+
+}
+div.row_details h3{
+    display: inline;
+    margin-bottom: 0px;
+    width: 320px;
+}
+div.row_description{
+
+}
