@@ -35,7 +35,7 @@ class Case_Controller extends Main_Controller {
 		$this->template->content = new View('cases');
 		
 		$this->template->content->cases = ORM::factory('case')
-					->orderby("id", "ASC")
+					->orderby("entry_date", "DES")
 					->find_all();
 		
                 

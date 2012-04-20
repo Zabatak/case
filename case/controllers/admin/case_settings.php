@@ -110,6 +110,7 @@ class Case_Settings_Controller extends Admin_Controller {
                 $case->description = $post->description;
                 $case->contact_person = $post->contact_person;
                 $case->contact_person_phone = $post->contact_person_phone;
+                $case->entry_date = date("Y-m-d H:i:s", time());
                 $case->save();
 
 
