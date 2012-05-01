@@ -35,7 +35,7 @@
 		
 		function rating(id,action,type,loader)
 		{
-                   <?php echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" ?>
+                   
 			$('#' + loader).html('<img src="<?php echo url::file_loc('img')."media/img/loading_g.gif"; ?>">');
 			$.post("<?php echo url::site().'case_view/rating/' ?>" + id, { action: action, type: type },
 				function(data){

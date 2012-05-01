@@ -80,7 +80,18 @@
                 <table class="rating-table" cellspacing="0" cellpadding="0" border="0">
                     <tr>
                         <td><?php echo Kohana::lang('ui_main.credibility'); ?>:</td>
+
+                        <?php
+                        print "<a href=\"" . url::site() . "case/rating2/" . $case_id . '/2/' . 'add' . "\" class=r_comments >";
+                        print "Add";
+                        print"</a>";
+
+                        print"<img id=oup_" . $case_id . " src=" . url::file_loc('img') . "media/img/up.png" . " alt=UP title=UP border=0 />";
+                        ?>
+
+
                         <td><a href="javascript:rating('<?php echo $case_id; ?>','add','original','oloader_<?php echo $case_id; ?>')">
+
                                 <img id="oup_<?php echo $case_id; ?>" src="<?php echo url::file_loc('img'); ?>media/img/up.png" alt="UP" title="UP" border="0" /></a></td>
                         <td><a href="javascript:rating('<?php echo $case_id; ?>','subtract','original')">
                                 <img id="odown_<?php echo $case_id; ?>" src="<?php echo url::file_loc('img'); ?>media/img/down.png" alt="DOWN" title="DOWN" border="0" /></a></td>
@@ -114,6 +125,20 @@
                         print"         <p>" . $comment->comment . "</p>";
                         print"     </td>";
                         print"  </tr>";
+                        print"<tr>";
+
+                        print"<td align=left>";
+                        print "<a href=\"" . url::site() . "case/rating2/" . $case_id . '/' . $comment->id . '/' . 'add' . "\" class=r_comments >";
+                        print"<img id=oup_" . $case_id . " src=" . url::file_loc('img') . "media/img/up.png" . " alt=UP title=UP border=0 />";
+                        print"</a>";
+                        print "<a href=\"" . url::site() . "case/rating2/" . $case_id . '/' . $comment->id . '/' . 'sub' . "\" class=r_comments >";
+                        print"<img id=oup_" . $case_id . " src=" . url::file_loc('img') . "media/img/down.png" . " alt=DOWN title=DOWN border=0 />";
+                        print"</a>";
+                        print"</td>";
+                        print"<td align=right>";
+                        print"Rate = ".$comment->rating ;
+                        print"</td>";
+                        print"</tr>";
                     }
                     ?>
                 </table>
@@ -123,19 +148,19 @@
 
         <div class="row">
             <h5>البريد الالكترونى</h5>
-            <?php print form::input('email', $form['email'], ' class="text title"'); ?>
+<?php print form::input('email', $form['email'], ' class="text title"'); ?>
         </div>
 
         <div class="row">
             <h5>التــعليق :</h5>
-            <?php print form::textArea('comment', $form['comment'], ' rows="3" cols="40" class="textarea long" '); ?>
+<?php print form::textArea('comment', $form['comment'], ' rows="3" cols="40" class="textarea long" '); ?>
         </div>
 
         <div class="report_row">
             <input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" /> 
         </div>
 
-        <?php print form::close(); ?>                 
+<?php print form::close(); ?>                 
 
     </div>
 </div>
