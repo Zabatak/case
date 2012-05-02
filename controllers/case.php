@@ -172,6 +172,7 @@ class Case_Controller extends Main_Controller {
         $this->template->content->form_saved = $form_saved;
         $this->template->content->case_id = $case->id;
         // Incident rating
+        plugin::add_stylesheet('case/views/css/caseComment');
         $this->template->content->rating = $rating;
         $this->template->header->header_block = $this->themes->header_block();
     }
@@ -187,7 +188,7 @@ class Case_Controller extends Main_Controller {
 
 
         if (!empty($action) AND !empty($case_id)) {
- 
+
             // Is this an ADD(+1) or SUBTRACT(-1)?
             if ($action == 'add') {
                 $action = 1;
@@ -210,7 +211,7 @@ class Case_Controller extends Main_Controller {
                 // If previous exits... update previous vote
                 $rating = new Case_comments_Model($previous->id);
 
-                
+
 
                 // Is there a user?
                 // User can't rate their own stuff
@@ -230,7 +231,7 @@ class Case_Controller extends Main_Controller {
                 //$rating->save();
                 // Get total rating and send back to json
 
-                  url::redirect('case/openCase/' . $id);
+                url::redirect('case/openCase/' . $id);
                 echo "SAVED! >>" . $total_rating;
                 //  echo json_encode(array("status" => "saved", "message" => "SAVED!", "rating" => $total_rating));
             } else {
@@ -239,91 +240,6 @@ class Case_Controller extends Main_Controller {
             }
         }
     }
-
-    /**
-     * Report Rating.
-     * @param boolean $id If id is supplied, a rating will be applied to selected report
-     */
-//    public function rating($id = false) {
-//
-//        $this->template = "";
-//        $this->auto_render = FALSE;
-//
-//        if (!$id) {
-//            echo json_encode(array("status" => "error", "message" => "ERROR!"));
-//        } else {
-//            if (!empty($_POST['action']) AND !empty($_POST['type'])) {
-//                $action = $_POST['action'];
-//                $type = $_POST['type'];
-//
-//                // Is this an ADD(+1) or SUBTRACT(-1)?
-//                if ($action == 'add') {
-//                    $action = 1;
-//                } elseif ($action == 'subtract') {
-//                    $action = -1;
-//                } else {
-//                    $action = 0;
-//                }
-//
-//                if (!empty($action) AND ($type == 'original' OR $type == 'comment')) {
-//                    // Has this User or IP Address rated this post before?
-//
-//                    $filter = "comment_ip = '" . $_SERVER['REMOTE_ADDR'] . "' ";
-//                    if ($type == 'original') {
-//                        $previous = ORM::factory('case_comments')
-//                                ->where('incident_id', $id)
-//                                ->where($filter)
-//                                ->find();
-//                    } elseif ($type == 'comment') {
-//                        $previous = ORM::factory('case_comments')
-//                                ->where('id', $id)
-//                                ->where($filter)
-//                                ->find();
-//                    }
-//
-//                    // If previous exits... update previous vote
-//                    $rating = new Case_comments_Model($previous->id);
-//
-//                    // Are we rating the original post or the comments?
-//                    if ($type == 'original') {
-//                        //$rating->incident_id = $id;
-//                    } elseif ($type == 'comment') {
-//                        $rating->id = $id;
-//                    }
-//
-//                    // Is there a user?
-//                    // User can't rate their own stuff
-//                    if ($type == 'original') {
-//                        if ($rating->incident->user_id == $this->user->id) {
-//                            echo json_encode(array("status" => "error", "message" => "Can't rate your own Reports!"));
-//                            exit;
-//                        }
-//                    } elseif ($type == 'comment') {
-//                        // Check if comment rating user is who add this comment before.
-//                        if ($rating->comment_ip == $_SERVER['REMOTE_ADDR']) {
-//                            echo json_encode(array("status" => "error", "message" => "Can't rate your own Comments!"));
-//                            exit;
-//                        }
-//                    }
-//
-//
-//                    //$rating->rating = $rating->rating + $action;
-//                    $rating->comment_ip = $_SERVER['REMOTE_ADDR'];
-//                    $rating->comment_date = date("Y-m-d H:i:s", time());
-//                    $rating->save();
-//
-//                    // Get total rating and send back to json
-//                    $total_rating = $this->_get_rating($id, $type);
-//
-//                    echo json_encode(array("status" => "saved", "message" => "SAVED!", "rating" => $total_rating));
-//                } else {
-//                    echo json_encode(array("status" => "error", "message" => "Nothing To Do!"));
-//                }
-//            } else {
-//                echo json_encode(array("status" => "error", "message" => "Nothing To Do!"));
-//            }
-//        }
-//    }
 
     /**
      * Retrieves Total Rating For Specific Post
@@ -345,8 +261,11 @@ class Case_Controller extends Main_Controller {
             $previousRate = $commentObj->rating;
             echo "Previous Rating [" . $previousRate . "] , action [" . $action . "]";
 
-            $total_rating = $previousRate + $action;
-
+            if ($previousRate >= 0) {
+                $total_rating = $previousRate + $action;
+            } else {
+                $total_rating = 0;
+            }
 
             //Finally Update Counts
             $comment = ORM::factory('case_comments', $caseid);

@@ -75,72 +75,59 @@
                 </div>
                 <br>
             </div>
-            <!-- credibility fields -->
-            <div class="credibility">
-                <table class="rating-table" cellspacing="0" cellpadding="0" border="0">
-                    <tr>
-                        <td><?php echo Kohana::lang('ui_main.credibility'); ?>:</td>
 
-                        <?php
-                        print "<a href=\"" . url::site() . "case/rating2/" . $case_id . '/2/' . 'add' . "\" class=r_comments >";
-                        print "Add";
-                        print"</a>";
-
-                        print"<img id=oup_" . $case_id . " src=" . url::file_loc('img') . "media/img/up.png" . " alt=UP title=UP border=0 />";
-                        ?>
-
-
-                        <td><a href="javascript:rating('<?php echo $case_id; ?>','add','original','oloader_<?php echo $case_id; ?>')">
-
-                                <img id="oup_<?php echo $case_id; ?>" src="<?php echo url::file_loc('img'); ?>media/img/up.png" alt="UP" title="UP" border="0" /></a></td>
-                        <td><a href="javascript:rating('<?php echo $case_id; ?>','subtract','original')">
-                                <img id="odown_<?php echo $case_id; ?>" src="<?php echo url::file_loc('img'); ?>media/img/down.png" alt="DOWN" title="DOWN" border="0" /></a></td>
-                        <td><a href="" class="rating_value" id="orating_<?php echo $case_id; ?>"><?php echo $rating; ?></a></td>
-                        <td><a href="" id="oloader_<?php echo $case_id; ?>" class="rating_loading" ></a></td>
-                    </tr>
-                </table>
-            </div>
 
             <!-- end credibility fields -->
             <div class="content">
 
-                <table class="rating-table" cellspacing="0" cellpadding="0" border="1" style="width: 450px;
-                       ">
+                <table id="table-comment">
+                    <thead>
+                        <tr>
+                            <th>التاريخ </th>
+                            <th>البريد </th>
+                        </tr>
 
-                    <?php
-                    foreach ($comments as $comment) {
 
+                    </thead>
+                    <tbody> 
+                        <?php
+                        foreach ($comments as $comment) {
 
-                        //<!-- start details Table -->
-                        print" <tr>";
-                        print"    <td align=left>";
-                        print"       Date [ " . $comment->comment_date . " ]";
-                        print"    </td>";
-                        print"    <td>" . $comment->comment_email . "</td>";
+                            //<!-- start details Table -->
+                            print"<tr>";
+                            print"<td><p class=date>";
+                            print $comment->comment_date;
+                            print"</p></td>";
 
-                        print"</tr>";
+                            print"<td>" . $comment->comment_email . "</td>";
 
-                        print" <tr>";
-                        print"     <td colspan=2 align=center>";
-                        print"         <p>" . $comment->comment . "</p>";
-                        print"     </td>";
-                        print"  </tr>";
-                        print"<tr>";
+                            print"</tr>";
+                            print"<tr>";
+                            print"<td colspan=2 >";
+                            print $comment->comment;
+                            print"</td>";
+                            print"</tr>";
 
-                        print"<td align=left>";
-                        print "<a href=\"" . url::site() . "case/rating2/" . $case_id . '/' . $comment->id . '/' . 'add' . "\" class=r_comments >";
-                        print"<img id=oup_" . $case_id . " src=" . url::file_loc('img') . "media/img/up.png" . " alt=UP title=UP border=0 />";
-                        print"</a>";
-                        print "<a href=\"" . url::site() . "case/rating2/" . $case_id . '/' . $comment->id . '/' . 'sub' . "\" class=r_comments >";
-                        print"<img id=oup_" . $case_id . " src=" . url::file_loc('img') . "media/img/down.png" . " alt=DOWN title=DOWN border=0 />";
-                        print"</a>";
-                        print"</td>";
-                        print"<td align=right>";
-                        print"Rate = ".$comment->rating ;
-                        print"</td>";
-                        print"</tr>";
-                    }
-                    ?>
+                            print"<tr>";
+
+                            print"<td>";
+                            print"Rate This :" ;
+                            print "<a href=\"" . url::site() . "case/rating2/" . $case_id . '/' . $comment->id . '/' . 'add' . "\" class=r_comments >";
+                            print"<img id=oup_" . $case_id . " src=" . url::file_loc('img') . "media/img/up.png" . " alt=UP title=UP border=0 />";
+                            print"</a>";
+                            print "<a href=\"" . url::site() . "case/rating2/" . $case_id . '/' . $comment->id . '/' . 'sub' . "\" class=r_comments >";
+                            print"<img id=oup_" . $case_id . " src=" . url::file_loc('img') . "media/img/down.png" . " alt=DOWN title=DOWN border=0 />";
+                            print"</a>";
+                            print"</td>";
+
+                            print"<td>";
+                            print"Total :" . $comment->rating;
+                            print"</td>";
+                            print"</tr>";
+                        }
+                        ?>
+
+                    </tbody>
                 </table>
 
             </div>
@@ -148,19 +135,19 @@
 
         <div class="row">
             <h5>البريد الالكترونى</h5>
-<?php print form::input('email', $form['email'], ' class="text title"'); ?>
+            <?php print form::input('email', $form['email'], ' class="text title"'); ?>
         </div>
 
         <div class="row">
             <h5>التــعليق :</h5>
-<?php print form::textArea('comment', $form['comment'], ' rows="3" cols="40" class="textarea long" '); ?>
+            <?php print form::textArea('comment', $form['comment'], ' rows="3" cols="40" class="textarea long" '); ?>
         </div>
 
         <div class="report_row">
             <input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" /> 
         </div>
 
-<?php print form::close(); ?>                 
+        <?php print form::close(); ?>                 
 
     </div>
 </div>
