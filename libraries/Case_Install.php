@@ -14,6 +14,8 @@ class Case_Install {
 	 */
 	public function __construct()
 	{
+               Kohana::log('debug', "welcome to Case Plugin, Activation , process [ Running ...]");
+		
 		$this->db =  new Database();
                 $this->uninstall();
 	}
@@ -23,7 +25,7 @@ class Case_Install {
 	 */
 	public function run_install()
 	{
-		
+		 Kohana::log('debug', "Case Plugin, Install DB , process [ Running ...]");
 		// ****************************************
 		// DATABASE STUFF
 		$this->db->query("
@@ -60,7 +62,7 @@ class Case_Install {
 				  `cases_case_id` int(10) unsigned NOT NULL,
                                   `comment_ip` varchar(100) DEFAULT NULL,
                                   `comment_email` varchar(120) DEFAULT NULL,                               
-				  `comment` varchar(120) NOT NULL,
+				  `comment` varchar(1020) NOT NULL,
                                   `comment_date` DATE NOT NULL,
                                   `rating` int(10) UNSIGNED NOT NULL DEFAULT 0 ,
 				  PRIMARY KEY (`id`),
@@ -81,7 +83,7 @@ class Case_Install {
 	 */
 	public function uninstall()
 	{
-            
+             Kohana::log('debug', "Case Plugin, Uninstall DB , process [ Running ...]");
                 $this->db->query("
 			DROP TABLE IF EXISTS ".Kohana::config('database.default.table_prefix')."cases_comments;
 			");

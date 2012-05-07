@@ -192,7 +192,7 @@ class Case_Controller extends Main_Controller {
             // Is this an ADD(+1) or SUBTRACT(-1)?
             if ($action == 'add') {
                 $action = 1;
-            } elseif ($action == 'subtract') {
+            } elseif ($action == 'sub') {
                 $action = -1;
             } else {
                 $action = 0;
