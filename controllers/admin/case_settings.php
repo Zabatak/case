@@ -193,5 +193,32 @@ class Case_Settings_Controller extends Admin_Controller {
     }
 
 //end method
+
+
+    function delet($id = false) {
+        Kohana::log('debug', "Delete case , id [ "  . $id. " ]");
+		
+        
+            
+            
+             $cases_incidents = ORM::factory('incident_id')
+                        ->where('cases_case_id', $id)
+                        ->delete_all();
+             
+             $case_comments = ORM::factory('case_comments')
+                        ->where('cases_case_id', $id)
+                        ->delete_all();
+            
+             $case =  ORM::factory('incident_id')
+                        ->where('id', $id)
+                        ->delete_all();
+        
+              Kohana::log('debug', "Delete case , id [ "  . $id. " ] , Done !");  
+             
+        
+        
+        
+    }
+
 }
 

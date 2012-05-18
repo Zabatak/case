@@ -28,19 +28,18 @@ class Case_Install {
 		 Kohana::log('debug', "Case Plugin, Install DB , process [ Running ...]");
 		// ****************************************
 		// DATABASE STUFF
-		$this->db->query("
-			CREATE TABLE IF NOT EXISTS `".Kohana::config('database.default.table_prefix')."cases`
-			(
-				id int(11) unsigned NOT NULL AUTO_INCREMENT,
-				title varchar(50) DEFAULT NULL,
-				contact_person varchar(50) DEFAULT NULL,
-				contact_person_phone varchar(50) DEFAULT NULL,
-				description longtext,
-				logo varchar(200) default NULL,
-                                entry_date DATE NOT NULL,
-				PRIMARY KEY (`id`)
-			);
-		");
+
+                $this->db->query('CREATE TABLE IF NOT EXISTS `'.Kohana::config('database.default.table_prefix').'cases` (
+				  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+				  `title` varchar(50) DEFAULT NULL,
+				  `contact_person` varchar(50) DEFAULT NULL,
+                                  `contact_person_phone` varchar(50) DEFAULT NULL,
+                                  `description`  longtext,
+                                  `entry_date`  DATE NOT NULL,
+
+                                  PRIMARY KEY (`id`)
+                                 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1');
+		
 		
 		// ****************************************
 		//create the table that tracks the incideints associated with a case
@@ -72,8 +71,8 @@ class Case_Install {
                 //Create defualt entry in case table
 		//insert into cases (`id`,`title`,`contact_person`,`contact_person_phone`,`description`)values(0,"","","","")
 		$this->db->query("INSERT INTO `".Kohana::config('database.default.table_prefix')."cases` (`id` ,`title` ,`contact_person` ,`contact_person_phone` ,
-				`description` ,`logo`)
-				VALUES (NULL ,  '-------------',  '',  '',  '',  '');");
+				`description` )
+				VALUES (NULL ,  '-------------',  '',  '',  '');");
 		 
 		
 	}
@@ -83,7 +82,7 @@ class Case_Install {
 	 */
 	public function uninstall()
 	{
-             Kohana::log('debug', "Case Plugin, Uninstall DB , process [ Running ...]");
+                Kohana::log('debug', "Case Plugin, Uninstall DB , process [ Running ...]");
                 $this->db->query("
 			DROP TABLE IF EXISTS ".Kohana::config('database.default.table_prefix')."cases_comments;
 			");

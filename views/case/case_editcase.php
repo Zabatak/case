@@ -61,7 +61,8 @@
 						<?php 
 						if($id)
 						{
-							echo "<li><a href=\"#\" class=\"btn_delete btns_red\">".strtoupper("Delete This Case")."</a></li>";
+                                                     
+						echo "<li><a href=\"". url::site()."admin/case_settings/delete/".$id ."\" class=\"btn_delete btns_red\">".strtoupper("Delete This Case")."</a></li>";
 						}
 						?>
 						<li><a href="<?php echo url::base().'admin/case_settings/';?>" class="btns_red">
